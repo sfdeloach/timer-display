@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timer</title>
+  </head>
+  <body>
+    <div id="settingsPage" class>
+      <input
+        placeholder="min"
+        type="number"
+        name="minutesInput"
+        min="0"
+        max="60"
+        class="time-input"
+      />
+      :
+      <input
+        placeholder="sec"
+        type="number"
+        name="secondsInput"
+        min="0"
+        max="59"
+        class="time-input"
+      />
+      <button id="timerButton">Timer</button>
+    </div>
+    <div id="timerPage" class="hidden">
+      <h1>
+        <span id="minutesDisplay">#</span>:<span id="secondsDisplay">##</span>
+      </h1>
+      <button id="startButton">Start</button>
+      <button id="stopButton">Stop</button>
+      <button id="settingsButton">Settings</button>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

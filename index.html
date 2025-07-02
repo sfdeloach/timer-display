@@ -15,7 +15,6 @@
         max="60"
         class="time-input"
       />
-      :
       <input
         placeholder="sec"
         type="number"
@@ -24,15 +23,16 @@
         max="59"
         class="time-input"
       />
-      <button id="timerButton">Timer</button>
+      <div>
+        <button id="timerButton">➔</button>
+      </div>
     </div>
     <div id="timerPage" class="hidden">
-      <h1>
-        <span id="minutesDisplay">#</span>:<span id="secondsDisplay">##</span>
-      </h1>
-      <button id="startButton">Start</button>
-      <button id="stopButton">Stop</button>
-      <button id="settingsButton">Settings</button>
+      <h1 id="display">error!</h1>
+      <button id="settingsButton">⏲</button>
+      <button id="startButton">▶</button>
+      <button id="stopButton">⏹</button>
+      <button id="resetButton">↺</button>
     </div>
     <script type="module" src="/src/main.js"></script>
   </body>

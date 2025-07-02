@@ -1,7 +1,26 @@
 import "./style.css";
 
 window.onload = function () {
-  const time = { initial: [3, 0], current: [0, 0] };
+  const time = {
+    initial: null,
+    current: null,
+    getSeconds() {
+      return this.current;
+    },
+    setSeconds(val) {
+      this.current = val;
+    },
+    tick() {
+      this.current--;
+    },
+    toString() {
+      return (
+        String(~~(this.current / 60)) +
+        ":" +
+        String(this.current % 60).padStart(2, "0")
+      );
+    },
+  };
 
   let intervalID = null;
 
@@ -13,16 +32,16 @@ window.onload = function () {
   const stopButton = document.getElementById("stopButton");
   const settingsButton = document.getElementById("settingsButton");
 
-  const minutesDisplay = document.getElementById("minutesDisplay");
-  const secondsDisplay = document.getElementById("secondsDisplay");
+  const display = document.getElementById("display");
 
   timerButton.addEventListener("click", () => {
     const inputs = document.querySelectorAll(".time-input");
-    time.initial[0] = parseInt(inputs[0].value) || 0;
-    time.initial[1] = parseInt(inputs[1].value) || 0;
 
-    minutesDisplay.innerText = String(time.initial[0]);
-    secondsDisplay.innerText = String(time.initial[1]).padStart(2, "0");
+    time.initial =
+      (parseInt(inputs[0].value) || 0) * 60 + (parseInt(inputs[1].value) || 0);
+    time.current = time.initial;
+
+    display.innerText = time.toString();
 
     settingsPage.classList.add("hidden");
     timerPage.classList.remove("hidden");

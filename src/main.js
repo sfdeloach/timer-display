@@ -28,9 +28,10 @@ window.onload = function () {
   const timerPage = document.getElementById("timerPage");
 
   const timerButton = document.getElementById("timerButton");
+  const settingsButton = document.getElementById("settingsButton");
   const startButton = document.getElementById("startButton");
   const stopButton = document.getElementById("stopButton");
-  const settingsButton = document.getElementById("settingsButton");
+  const resetButton = document.getElementById("resetButton");
 
   const display = document.getElementById("display");
 
@@ -47,9 +48,21 @@ window.onload = function () {
     timerPage.classList.remove("hidden");
   });
 
+  settingsButton.addEventListener("click", () => {
+    timerPage.classList.add("hidden");
+    settingsPage.classList.remove("hidden");
+    // TODO: set input fields to current time
+  });
+
   startButton.addEventListener("click", () => {
     intervalID = setInterval(() => {
-      console.log("tick");
+      if (time.current > 0) {
+        time.current--;
+        display.innerText = time.toString();
+        // TODO: change colors
+      } else {
+        clearInterval(intervalID);
+      }
     }, 1000);
   });
 
@@ -57,8 +70,9 @@ window.onload = function () {
     clearInterval(intervalID);
   });
 
-  settingsButton.addEventListener("click", () => {
-    timerPage.classList.add("hidden");
-    settingsPage.classList.remove("hidden");
+  resetButton.addEventListener("click", () => {
+    clearInterval(intervalID);
+    time.current = time.initial;
+    display.innerText = time.toString();
   });
 };

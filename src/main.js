@@ -2,8 +2,8 @@ import "./style.css";
 
 window.onload = function () {
   const time = {
-    initial: null,
-    current: null,
+    initial: 0,
+    current: 0,
     getSeconds() {
       return this.current;
     },
@@ -33,15 +33,19 @@ window.onload = function () {
   const stopButton = document.getElementById("stopButton");
   const resetButton = document.getElementById("resetButton");
 
+  const inputs = document.querySelectorAll(".time-input");
   const display = document.getElementById("display");
 
+  inputs.forEach((input) => {
+    input.addEventListener("change", (e) => {
+      time.current =
+        (parseInt(inputs[0].value) || 0) * 60 +
+        (parseInt(inputs[1].value) || 0);
+    });
+  });
+
   timerButton.addEventListener("click", () => {
-    const inputs = document.querySelectorAll(".time-input");
-
-    time.initial =
-      (parseInt(inputs[0].value) || 0) * 60 + (parseInt(inputs[1].value) || 0);
-    time.current = time.initial;
-
+    time.initial = time.current;
     display.innerText = time.toString();
 
     settingsPage.classList.add("hidden");

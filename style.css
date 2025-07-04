@@ -17,13 +17,18 @@ body {
 #settingsPage {
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   min-height: 100vh;
 }
 
 #timerPage {
   justify-content: center;
   align-items: center;
+}
+
+#display {
+  user-select: none;
+  cursor: none;
 }
 
 .warning {
@@ -38,9 +43,10 @@ body {
   animation: pulse 4s infinite;
 }
 
-h1 {
+p {
+  font-weight: 700;
+  line-height: 1;
   margin: 0;
-  font-size: 75vh;
   text-shadow: 8px 8px 16px #000000;
   transition: all 4s ease-in-out;
 }
@@ -69,8 +75,6 @@ button {
   color: #777777;
   cursor: pointer;
   font-size: 2rem;
-  padding: 0.75rem;
-  margin: 0 2rem;
   border-width: 2px;
   border-style: solid;
   border-color: #555555;
@@ -80,6 +84,13 @@ button {
   border-top-right-radius: 15px 225px;
   transition: all 235ms ease-in-out;
   opacity: 0.15;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 }
 
 button:hover {

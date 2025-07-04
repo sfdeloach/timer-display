@@ -4,6 +4,109 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Timer</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #333;
+        color: #eee;
+        margin: 0;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .show {
+        display: flex;
+        flex-direction: column;
+      }
+
+      #settingsPage {
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        min-height: 100vh;
+      }
+
+      #timerPage {
+        justify-content: center;
+        align-items: center;
+      }
+
+      .warning {
+        color: #f5e023;
+      }
+
+      .danger {
+        color: #ca1c1c;
+      }
+
+      .pulse {
+        animation: pulse 4s infinite;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 75vh;
+        text-shadow: 8px 8px 16px #000000;
+        transition: all 4s ease-in-out;
+      }
+
+      input {
+        background-color: transparent;
+        color: #777777;
+        font-size: 2rem;
+        font-weight: 700;
+        text-align: center;
+        padding: 0.75rem;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #555555;
+        border-bottom-left-radius: 15px 255px;
+        border-bottom-right-radius: 225px 15px;
+        border-top-left-radius: 255px 15px;
+        border-top-right-radius: 15px 225px;
+        transition: all 235ms ease-in-out;
+      }
+
+      button {
+        width: 5rem;
+        height: 5rem;
+        background-color: rgb(255, 255, 255, 0.1);
+        color: #777777;
+        cursor: pointer;
+        font-size: 2rem;
+        padding: 0.75rem;
+        margin: 0 2rem;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #555555;
+        border-bottom-left-radius: 15px 255px;
+        border-bottom-right-radius: 225px 15px;
+        border-top-left-radius: 255px 15px;
+        border-top-right-radius: 15px 225px;
+        transition: all 235ms ease-in-out;
+        opacity: 0.15;
+      }
+
+      button:hover {
+        transform: translate3d(0, 2px, 0);
+        opacity: 1;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          color: #ca1c1c;
+        }
+        50% {
+          transform: scale(0.98);
+          opacity: 0.2;
+          color: #b30e0e;
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="settingsPage" class="show">
@@ -38,6 +141,112 @@
         <button id="resetButton">↺</button>
       </div>
     </div>
-    <script type="module" src="./assets/main.js"></script>
+    <script>
+      window.onload = function () {
+        const time = {
+          initial: 0,
+          current: 0,
+          getSeconds() {
+            return this.current;
+          },
+          setSeconds(val) {
+            this.current = val;
+          },
+          tick() {
+            this.current--;
+          },
+          toString() {
+            return (
+              String(~~(this.current / 60)) +
+              ":" +
+              String(this.current % 60).padStart(2, "0")
+            );
+          },
+        };
+
+        let intervalID = null;
+
+        const settingsPage = document.getElementById("settingsPage");
+        const timerPage = document.getElementById("timerPage");
+
+        const timerButton = document.getElementById("timerButton");
+        const settingsButton = document.getElementById("settingsButton");
+        const startButton = document.getElementById("startButton");
+        const stopButton = document.getElementById("stopButton");
+        const resetButton = document.getElementById("resetButton");
+
+        const inputs = document.querySelectorAll(".time-input");
+        const display = document.getElementById("display");
+
+        function stopTimer() {
+          if (intervalID !== null) {
+            clearInterval(intervalID);
+            intervalID = null;
+          }
+        }
+
+        inputs.forEach((input) => {
+          input.addEventListener("change", (e) => {
+            time.current =
+              (parseInt(inputs[0].value) || 0) * 60 +
+              (parseInt(inputs[1].value) || 0);
+            time.initial = time.current;
+          });
+        });
+
+        timerButton.addEventListener("click", () => {
+          display.innerText = time.toString();
+
+          settingsPage.classList.add("hidden");
+          settingsPage.classList.remove("show");
+          timerPage.classList.add("show");
+          timerPage.classList.remove("hidden");
+        });
+
+        settingsButton.addEventListener("click", () => {
+          stopTimer();
+          timerPage.classList.add("hidden");
+          timerPage.classList.remove("show");
+          settingsPage.classList.add("show");
+          settingsPage.classList.remove("hidden");
+        });
+
+        startButton.addEventListener("click", () => {
+          if (intervalID === null) {
+            intervalID = setInterval(() => {
+              if (time.current > 0) {
+                time.current--;
+                display.innerText = time.toString();
+                if (time.current >= 60) {
+                  display.classList.remove("danger", "warning", "pulse");
+                } else if (15 <= time.current && time.current < 60) {
+                  display.classList.add("warning");
+                  display.classList.remove("danger", "pulse");
+                } else if (0 < time.current && time.current < 15) {
+                  display.classList.add("danger");
+                  display.classList.remove("warning", "pulse");
+                } else {
+                  display.classList.add("danger", "pulse");
+                  display.classList.remove("warning");
+                }
+              } else {
+                clearInterval(intervalID);
+                intervalID = null;
+              }
+            }, 1000);
+          }
+        });
+
+        stopButton.addEventListener("click", stopTimer);
+
+        resetButton.addEventListener("click", () => {
+          clearInterval(intervalID);
+          intervalID = null;
+          display.classList.remove("danger", "warning", "pulse");
+          time.current = time.initial;
+          display.innerText = time.toString();
+        });
+      };
+    </script>
   </body>
 </html>

@@ -36,46 +36,71 @@ window.onload = function () {
   const inputs = document.querySelectorAll(".time-input");
   const display = document.getElementById("display");
 
+  function stopTimer() {
+    if (intervalID !== null) {
+      clearInterval(intervalID);
+      intervalID = null;
+    }
+  }
+
   inputs.forEach((input) => {
     input.addEventListener("change", (e) => {
       time.current =
         (parseInt(inputs[0].value) || 0) * 60 +
         (parseInt(inputs[1].value) || 0);
+      time.initial = time.current;
     });
   });
 
   timerButton.addEventListener("click", () => {
-    time.initial = time.current;
     display.innerText = time.toString();
 
     settingsPage.classList.add("hidden");
+    settingsPage.classList.remove("show");
+    timerPage.classList.add("show");
     timerPage.classList.remove("hidden");
   });
 
   settingsButton.addEventListener("click", () => {
+    stopTimer();
     timerPage.classList.add("hidden");
+    timerPage.classList.remove("show");
+    settingsPage.classList.add("show");
     settingsPage.classList.remove("hidden");
-    // TODO: set input fields to current time
   });
 
   startButton.addEventListener("click", () => {
-    intervalID = setInterval(() => {
-      if (time.current > 0) {
-        time.current--;
-        display.innerText = time.toString();
-        // TODO: change colors
-      } else {
-        clearInterval(intervalID);
-      }
-    }, 1000);
+    if (intervalID === null) {
+      intervalID = setInterval(() => {
+        if (time.current > 0) {
+          time.current--;
+          display.innerText = time.toString();
+          if (time.current >= 60) {
+            display.classList.remove("danger", "warning", "pulse");
+          } else if (15 <= time.current && time.current < 60) {
+            display.classList.add("warning");
+            display.classList.remove("danger", "pulse");
+          } else if (0 < time.current && time.current < 15) {
+            display.classList.add("danger");
+            display.classList.remove("warning", "pulse");
+          } else {
+            display.classList.add("danger", "pulse");
+            display.classList.remove("warning");
+          }
+        } else {
+          clearInterval(intervalID);
+          intervalID = null;
+        }
+      }, 1000);
+    }
   });
 
-  stopButton.addEventListener("click", () => {
-    clearInterval(intervalID);
-  });
+  stopButton.addEventListener("click", stopTimer);
 
   resetButton.addEventListener("click", () => {
     clearInterval(intervalID);
+    intervalID = null;
+    display.classList.remove("danger", "warning", "pulse");
     time.current = time.initial;
     display.innerText = time.toString();
   });

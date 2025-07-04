@@ -2,26 +2,59 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: #333;
   color: #eee;
+  margin: 0;
 }
 
 .hidden {
   display: none;
 }
 
+.show {
+  display: flex;
+  flex-direction: column;
+}
+
+#settingsPage {
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  min-height: 100vh;
+}
+
+#timerPage {
+  justify-content: center;
+  align-items: center;
+}
+
+.warning {
+  color: #f5e023;
+}
+
+.danger {
+  color: #ca1c1c;
+}
+
+.pulse {
+  animation: pulse 4s infinite;
+}
+
 h1 {
   margin: 0;
+  font-size: 75vh;
+  text-shadow: 8px 8px 16px #000000;
+  transition: all 4s ease-in-out;
 }
 
 input {
   background-color: transparent;
-  color: #777;
+  color: #777777;
   font-size: 2rem;
   font-weight: 700;
   text-align: center;
   padding: 0.75rem;
   border-width: 2px;
   border-style: solid;
-  border-color: #555;
+  border-color: #555555;
   border-bottom-left-radius: 15px 255px;
   border-bottom-right-radius: 225px 15px;
   border-top-left-radius: 255px 15px;
@@ -30,22 +63,39 @@ input {
 }
 
 button {
+  width: 5rem;
+  height: 5rem;
   background-color: rgb(255, 255, 255, 0.1);
-  color: #777;
+  color: #777777;
   cursor: pointer;
   font-size: 2rem;
-  margin-top: 1rem;
   padding: 0.75rem;
+  margin: 0 2rem;
   border-width: 2px;
   border-style: solid;
-  border-color: #555;
+  border-color: #555555;
   border-bottom-left-radius: 15px 255px;
   border-bottom-right-radius: 225px 15px;
   border-top-left-radius: 255px 15px;
   border-top-right-radius: 15px 225px;
   transition: all 235ms ease-in-out;
+  opacity: 0.15;
 }
 
 button:hover {
   transform: translate3d(0, 2px, 0);
+  opacity: 1;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    color: #ca1c1c;
+  }
+  50% {
+    transform: scale(0.98);
+    opacity: 0.2;
+    color: #b30e0e;
+  }
 }

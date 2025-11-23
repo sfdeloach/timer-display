@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timer</title>
+    <link type="text/css" href="./style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="settingsPage" class="show">
+      <div>
+        <input
+          placeholder="min"
+          type="number"
+          name="min"
+          min="0"
+          max="60"
+          class="timeInput"
+        /><span
+          style="
+            display: inline-block;
+            transform: rotate(90deg);
+            color: #777777;
+          "
+          >-x x-</span
+        >
+        <input
+          placeholder="sec"
+          type="number"
+          name="sec"
+          min="0"
+          max="59"
+          class="timeInput"
+        />
+      </div>
+      <div>
+        <button id="timerBtn">➜</button>
+      </div>
+    </div>
+    <div id="timerPage" class="hidden">
+      <p id="display">🚫 Error occurred, open console for more info.</p>
+      <div class="buttonGroup">
+        <button id="settingsBtn" style="transform: rotate(180deg)">➜</button>
+        <button id="startBtn" style="transform: rotate(90deg)">▲</button>
+        <button id="stopBtn">■</button>
+        <button id="resetBtn">◯</button>
+        <button id="increaseBtn">▲</button>
+        <button id="decreaseBtn">▼</button>
+      </div>
+    </div>
+    <script type="text/javascript" src="./main.js"></script>
+  </body>
+</html>

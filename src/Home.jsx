@@ -15,8 +15,6 @@ function Home() {
     const subjectSec = formData.get("subject-seconds");
     const speakerMin = formData.get("speaker-minutes");
     const speakerSec = formData.get("speaker-seconds");
-    console.log(`Subject Timer: ${subjectMin}:${subjectSec}`);
-    console.log(`Speaker Timer: ${speakerMin}:${speakerSec}`);
     navigate(
       `/timer?subjectMin=${subjectMin}&subjectSec=${subjectSec}&speakerMin=${speakerMin}&speakerSec=${speakerSec}`,
     );
@@ -28,12 +26,14 @@ function Home() {
         <label htmlFor="subject-minutes">Minutes:</label>
         <NumberField
           name="subject-minutes"
+          id="subject-minutes"
           defaultValue="60"
           onChange={handleChange}
         />
         <label htmlFor="subject-seconds">Seconds:</label>
         <NumberField
           name="subject-seconds"
+          id="subject-seconds"
           defaultValue="0"
           onChange={handleChange}
         />
@@ -42,18 +42,20 @@ function Home() {
         <label htmlFor="speaker-minutes">Minutes:</label>
         <NumberField
           name="speaker-minutes"
+          id="speaker-minutes"
           defaultValue="3"
           onChange={handleChange}
         />
         <label htmlFor="speaker-seconds">Seconds:</label>
         <NumberField
           name="speaker-seconds"
+          id="speaker-seconds"
           defaultValue="0"
           onChange={handleChange}
         />
       </Container>
 
-      <Button type="submit" color="green"/>
+      <Button type="submit" color="green" />
     </form>
   );
 }

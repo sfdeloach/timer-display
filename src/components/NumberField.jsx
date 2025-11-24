@@ -1,10 +1,11 @@
-function NumberField({ onChange, defaultValue, name }) {
+function NumberField({ onChange, defaultValue, name, id }) {
   return (
     <input
       type="number"
       onChange={onChange}
       defaultValue={defaultValue}
       name={name}
+      id={id}
       className="mx-2 w-20 rounded border border-gray-500 py-2 text-center shadow-lg focus:outline-none"
     />
   );

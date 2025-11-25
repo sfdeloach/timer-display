@@ -1,13 +1,13 @@
-function Button({ type, icon: Icon, onClick }) {
+function Button({ id, icon: Icon, fill, onClick }) {
   return (
     <button
-      type={type}
-      onClick={type === "submit" ? null : onClick}
+      id={id}
+      onClick={onClick}
       className={
-        "cursor-pointer rounded-full p-4 shadow-lg transition hover:scale-90 hover:shadow-none"
+        "cursor-pointer rounded-xl px-8 py-4 shadow-lg transition hover:scale-90 hover:shadow-none"
       }
     >
-      <Icon />
+      <Icon fill={fill} />
     </button>
   );
 }

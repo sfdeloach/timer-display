@@ -1,8 +1,8 @@
 function Container({ children, title, hasBorder = true }) {
-  let classNames = "rounded-2xl p-8 shadow-lg";
+  let classNames = "rounded-xl p-8 shadow-lg";
 
   if (!hasBorder) {
-    classNames = "";
+    classNames = "p-8";
   }
 
   return (

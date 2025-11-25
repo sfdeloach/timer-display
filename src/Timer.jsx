@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
-import Container from "./components/Container";
+import ArrowBack from "./icons/ArrowBack";
 import Button from "./components/Button";
+import Container from "./components/Container";
 
 function Timer() {
   let navigate = useNavigate();
@@ -11,10 +12,12 @@ function Timer() {
 
   return (
     <div className="flex flex-col items-center gap-12 pt-12">
-      <Container>
-        <p className="font-serif text-[25vw] leading-[20vw]">3:00</p>
+      <Container hasBorder={false}>
+        <p className="text-[25vw] leading-[20vw] tracking-wide text-shadow-[10px_10px_20px_rgba(0,0,0,0.3)]">
+          3:00
+        </p>
       </Container>
-      <Button type="button" onClick={onClick} color="red" />
+      <Button type="button" icon={ArrowBack} onClick={onClick} />
     </div>
   );
 }

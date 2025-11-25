@@ -6,7 +6,7 @@ function NumberField({ onChange, defaultValue, name, id }) {
       defaultValue={defaultValue}
       name={name}
       id={id}
-      className="mx-2 w-20 rounded border border-gray-500 py-2 text-center shadow-lg focus:outline-none"
+      className="mx-2 w-20 rounded py-2 text-center shadow-lg focus:outline-none"
     />
   );
 }

@@ -1,20 +1,44 @@
+import { useContext } from "react";
+import { TimerContext } from "./AppLayout";
 import Container from "./components/Container";
 import NumberField from "./components/NumberField";
 
 function Settings() {
+  const timerContext = useContext(TimerContext);
+  const timerState = timerContext.timerState;
+  const setTimerState = timerContext.setTimerState;
+
+  function handleChange(timer, value) {
+    if (timer === "subject") {
+      setTimerState((prevState) => ({
+        ...prevState,
+        subjectInitial: value,
+      }));
+    } else if (timer === "speaker") {
+      setTimerState((prevState) => ({
+        ...prevState,
+        speakerInitial: value,
+      }));
+    }
+  }
+
   return (
     <form className="flex flex-col items-center gap-6">
-      <Container title="Subject Timer">
-        <label htmlFor="subject-minutes">Minutes:</label>
-        <NumberField name="subject-minutes" id="subject-minutes" />
-        <label htmlFor="subject-seconds">Seconds:</label>
-        <NumberField name="subject-seconds" id="subject-seconds" />
+      <Container title="Speaker">
+        <NumberField
+          timer="speaker"
+          value={`${timerState.speakerInitial / 60}`}
+          onChange={handleChange}
+        />
+        <label htmlFor="speaker">minutes</label>
       </Container>
-      <Container title="Speaker Timer">
-        <label htmlFor="speaker-minutes">Minutes:</label>
-        <NumberField name="speaker-minutes" id="speaker-minutes" />
-        <label htmlFor="speaker-seconds">Seconds:</label>
-        <NumberField name="speaker-seconds" id="speaker-seconds" />
+      <Container title="Subject">
+        <NumberField
+          timer="subject"
+          value={`${timerState.subjectInitial / 60}`}
+          onChange={handleChange}
+        />
+        <label htmlFor="subject">minutes</label>
       </Container>
     </form>
   );

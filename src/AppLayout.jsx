@@ -19,10 +19,16 @@ function AppLayout() {
   useEffect(() => {
     if (timerState.speakerIsRunning && speakerIntervalId === null) {
       const intervalId = setInterval(() => {
-        setTimerState((prevState) => ({
-          ...prevState,
-          speakerSecs: prevState.speakerSecs - 1,
-        }));
+        setTimerState((prevState) => {
+          if (prevState.speakerSecs <= 1) {
+            return { ...prevState, speakerSecs: 0, speakerIsRunning: false };
+          } else {
+            return {
+              ...prevState,
+              speakerSecs: prevState.speakerSecs - 1,
+            };
+          }
+        });
       }, 1000);
       setSpeakerIntervalId(intervalId);
     } else if (!timerState.speakerIsRunning && speakerIntervalId !== null) {
@@ -40,10 +46,16 @@ function AppLayout() {
   useEffect(() => {
     if (timerState.subjectIsRunning && subjectIntervalId === null) {
       const intervalId = setInterval(() => {
-        setTimerState((prevState) => ({
-          ...prevState,
-          subjectSecs: prevState.subjectSecs - 1,
-        }));
+        setTimerState((prevState) => {
+          if (prevState.subjectSecs <= 1) {
+            return { ...prevState, subjectSecs: 0, subjectIsRunning: false };
+          } else {
+            return {
+              ...prevState,
+              subjectSecs: prevState.subjectSecs - 1,
+            };
+          }
+        });
       }, 1000);
       setSubjectIntervalId(intervalId);
     } else if (!timerState.subjectIsRunning && subjectIntervalId !== null) {

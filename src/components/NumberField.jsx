@@ -1,6 +1,7 @@
-function NumberField({ timer, value, onChange }) {
+function NumberField({ timer, unit, value, onChange }) {
   function onChangeWrapper(event) {
-    let value = parseInt(event.target.value, 10) * 60;
+    const value = parseInt(event.target.value, 10) || 0;
+
     onChange(timer, value);
   }
 
@@ -10,8 +11,8 @@ function NumberField({ timer, value, onChange }) {
       min="0"
       value={value}
       onChange={onChangeWrapper}
-      name={`${timer}`}
-      id={`${timer}`}
+      name={`${timer}-${unit}`}
+      id={`${timer}-${unit}`}
       className="mx-2 w-20 rounded py-2 text-center shadow-lg focus:outline-none"
     />
   );

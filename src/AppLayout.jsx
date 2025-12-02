@@ -7,8 +7,8 @@ export const FillContext = createContext(null);
 
 function AppLayout() {
   const [timerState, setTimerState] = useState({
-    speakerSecs: 180,
-    speakerInitial: 180,
+    speakerSecs: 120,
+    speakerInitial: 120,
     speakerIsRunning: false,
     subjectSecs: 3600,
     subjectInitial: 3600,

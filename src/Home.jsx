@@ -1,6 +1,6 @@
 function Home() {
   return (
-    <div className="mx-auto max-w-3xl space-y-6 p-8">
+    <div className="mx-auto mt-24 max-w-3xl space-y-6 p-8">
       <h1 className="mb-4 text-4xl font-bold text-zinc-800">
         Robert's Rules Timer
       </h1>
@@ -13,10 +13,9 @@ function Home() {
         <section className="space-y-2">
           <h3 className="text-xl font-semibold text-zinc-700">Purpose</h3>
           <p className="text-zinc-600">
-            This timer helps manage debate time during congregational meetings
-            following Robert's Rules of Order Newly Revised. It tracks two
+            This timer helps manage debate time during meetings. It tracks two
             separate timers: one for individual speakers and one for the total
-            time allotted to debate a motion.
+            time allotted to debate a topic.
           </p>
         </section>
 
@@ -74,7 +73,7 @@ function Home() {
               Display the timer page on a screen visible to all participants
             </li>
             <li>Reset the Speaker Timer after each person finishes speaking</li>
-            <li>The Subject Timer tracks the cumulative debate time</li>
+            <li>The Subject Timer tracks the remaining debate time</li>
             <li>Both timers can run simultaneously or independently</li>
           </ul>
         </section>

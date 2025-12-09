@@ -1,11 +1,8 @@
 import { useEffect, useContext } from "react";
-import { TimerContext, FillContext } from "./AppLayout";
+import { TimerContext } from "./AppLayout";
 import Container from "./components/Container";
-import Button from "./components/Button";
-import ReplayIcon from "./icons/ReplayIcon";
 
 function Timers() {
-  const fillContext = useContext(FillContext);
   const timerContext = useContext(TimerContext);
   const timerState = timerContext.timerState;
   const setTimerState = timerContext.setTimerState;
@@ -29,9 +26,9 @@ function Timers() {
 
     const percentRemaining = currentSecs / initialSecs;
 
-    if (percentRemaining > 0.5) {
+    if (percentRemaining > 0.25) {
       return "text-zinc-700";
-    } else if (percentRemaining > 0.25) {
+    } else if (percentRemaining > 0.1) {
       return "text-yellow-600";
     } else {
       return "text-red-700";
@@ -59,39 +56,23 @@ function Timers() {
     }));
   }
 
-  function onSpeakerReset() {
-    setTimerState((prevState) => ({
-      ...prevState,
-      speakerSecs: prevState.speakerInitial,
-      speakerIsRunning: false,
-    }));
-  }
-
   return (
     <div className="flex flex-col items-center">
       <Container hasBorder={false}>
         <p
           onClick={onSpeakerClick}
-          className={`cursor-pointer text-[64vh] leading-none transition-colors duration-1000 ${getTimerColor(
+          className={`cursor-pointer text-[92vh]/[84vh] tracking-[-3rem] transition-colors duration-2000 ${getTimerColor(
             timerState.speakerSecs,
             timerState.speakerInitial,
           )} ${getFlashClass(timerState.speakerSecs)}`}
         >
           {timeString(timerState.speakerSecs)}
         </p>
-        <Button
-          id="reset"
-          icon={ReplayIcon}
-          fill={fillContext}
-          onClick={onSpeakerReset}
-        >
-          Reset Speaker Timer
-        </Button>
       </Container>
       <Container hasBorder={false}>
         <p
           onClick={onSubjectClick}
-          className={`cursor-pointer text-[24vh] leading-none transition-colors duration-1000 ${getTimerColor(
+          className={`cursor-pointer text-[14vh]/[6vh] transition-colors duration-2000 ${getTimerColor(
             timerState.subjectSecs,
             timerState.subjectInitial,
           )} ${getFlashClass(timerState.subjectSecs)}`}

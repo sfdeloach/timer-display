@@ -39,7 +39,7 @@ function Settings() {
   }
 
   return (
-    <form className="flex flex-col items-center gap-6">
+    <form className="mt-24 flex flex-col items-center gap-6">
       <Container title="Speaker Timer">
         <NumberField
           timer="speaker"

@@ -1,6 +1,6 @@
 services:
   webserver:
     build: .
-    image: timer-display:latest
+    image: sfdeloach/timer-display:0.0.2
     ports:
       - "8080:80"

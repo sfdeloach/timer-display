@@ -13,6 +13,7 @@ function AppLayout() {
     subjectSecs: 3600,
     subjectInitial: 3600,
     subjectIsRunning: false,
+    subjectIsVisible: true,
   });
 
   useEffect(() => {

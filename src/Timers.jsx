@@ -21,6 +21,12 @@ function Timers() {
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   }
 
+  function getSize() {
+    return timerState.subjectIsVisible
+      ? "text-[92vh]/[84vh]"
+      : "text-[98vh]/[86vh]";
+  }
+
   function getTimerColor(currentSecs, initialSecs) {
     if (currentSecs === 0) return "text-red-600";
 
@@ -61,7 +67,7 @@ function Timers() {
       <Container hasBorder={false}>
         <p
           onClick={onSpeakerClick}
-          className={`cursor-pointer text-[92vh]/[84vh] tracking-[-3rem] transition-colors duration-2000 ${getTimerColor(
+          className={`cursor-pointer ${getSize()} tracking-[-3rem] transition-colors duration-2000 ${getTimerColor(
             timerState.speakerSecs,
             timerState.speakerInitial,
           )} ${getFlashClass(timerState.speakerSecs)}`}
@@ -69,7 +75,7 @@ function Timers() {
           {timeString(timerState.speakerSecs)}
         </p>
       </Container>
-      <Container hasBorder={false}>
+      <Container hasBorder={false} isVisible={timerState.subjectIsVisible}>
         <p
           onClick={onSubjectClick}
           className={`cursor-pointer text-[14vh]/[6vh] transition-colors duration-2000 ${getTimerColor(

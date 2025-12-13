@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { TimerContext } from "./AppLayout";
 import Container from "./components/Container";
 import NumberField from "./components/NumberField";
+import Checkbox from "./components/Checkbox";
 
 function Settings() {
   const timerContext = useContext(TimerContext);
@@ -57,20 +58,33 @@ function Settings() {
         <label htmlFor="speaker-seconds">seconds</label>
       </Container>
       <Container title="Subject Timer">
-        <NumberField
-          timer="subject"
-          unit="minutes"
-          value={`${Math.floor(timerState.subjectInitial / 60)}`}
-          onChange={(timer, value) => handleChange(timer, "minutes", value)}
+        <div className="mb-4">
+          <NumberField
+            timer="subject"
+            unit="minutes"
+            value={`${Math.floor(timerState.subjectInitial / 60)}`}
+            onChange={(timer, value) => handleChange(timer, "minutes", value)}
+          />
+          <label htmlFor="subject-minutes">minutes</label>
+          <NumberField
+            timer="subject"
+            unit="seconds"
+            value={`${timerState.subjectInitial % 60}`}
+            onChange={(timer, value) => handleChange(timer, "seconds", value)}
+          />
+          <label htmlFor="subject-seconds">seconds</label>
+        </div>
+        <Checkbox
+          label="Show timer?"
+          id="checkbox"
+          checked={timerState.subjectIsVisible}
+          onChange={(evt) =>
+            setTimerState((prevState) => ({
+              ...prevState,
+              subjectIsVisible: evt.target.checked,
+            }))
+          }
         />
-        <label htmlFor="subject-minutes">minutes</label>
-        <NumberField
-          timer="subject"
-          unit="seconds"
-          value={`${timerState.subjectInitial % 60}`}
-          onChange={(timer, value) => handleChange(timer, "seconds", value)}
-        />
-        <label htmlFor="subject-seconds">seconds</label>
       </Container>
     </form>
   );

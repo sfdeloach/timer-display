@@ -1,8 +1,12 @@
-function Container({ children, title, hasBorder = true }) {
+function Container({ children, title, hasBorder = true, isVisible = true }) {
   let classNames = "rounded-xl p-24 shadow-lg";
 
   if (!hasBorder) {
     classNames = "";
+  }
+
+  if (!isVisible) {
+    classNames += " hidden";
   }
 
   return (
